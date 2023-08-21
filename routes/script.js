@@ -40,7 +40,6 @@ function gameEngine() {
         inputDir = { x: 0, y: 0 };
         alert("Game over. Press any key to play again!");
         sankeArr = [{ x: 13, y: 15 }];
-        musicSound.play();
         score = 0;
     }
 
@@ -48,7 +47,7 @@ function gameEngine() {
     if (sankeArr[0].y === food.y && sankeArr[0].x === food.x) {
         foodSound.play();
         score += 1; 
-        score.innerHTML = 'Socre: ' + score
+        scoreBox.innerHTML = 'Socre: ' + score
         sankeArr.unshift({ x: sankeArr[0].x + inputDir.x, y: sankeArr[0].y + inputDir.y });
         let a = 2;
         let b = 16;
@@ -91,6 +90,7 @@ window.requestAnimationFrame(main)
 window.addEventListener('keydown', e => {
     inputDir = { x: 1, y: 0 } // Start the game
     moveSound.play();
+    musicSound.play()
     switch (e.key) {
         case "ArrowUp":
             console.log("ArrowUp");
