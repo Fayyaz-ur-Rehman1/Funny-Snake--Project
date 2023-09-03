@@ -47,6 +47,11 @@ function gameEngine() {
     if (sankeArr[0].y === food.y && sankeArr[0].x === food.x) {
         foodSound.play();
         score += 1; 
+        if(score > hisscoreval){
+            hisscoreval = score
+            localStorage.setItem('hiscore', JSON.stringify(hisscoreval))
+            highscoreBox.innerHTML = "HighScore :" + hisscoreval   
+        }
         scoreBox.innerHTML = 'Socre: ' + score
         sankeArr.unshift({ x: sankeArr[0].x + inputDir.x, y: sankeArr[0].y + inputDir.y });
         let a = 2;
@@ -86,6 +91,17 @@ function gameEngine() {
 }
 
 // main Logic start here
+
+let hiscore = localStorage.getItem("hiscore");
+if(hiscore===null){
+    hisscoreval = 0;
+    localStorage.setItem('hiscore', JSON.stringify(hisscoreval))
+}
+else{
+    hisscoreval = JSON.parse(hiscore)
+    highscoreBox.innerHTML = "HighScore :" + hiscore   
+}
+
 window.requestAnimationFrame(main)
 window.addEventListener('keydown', e => {
     inputDir = { x: 1, y: 0 } // Start the game
